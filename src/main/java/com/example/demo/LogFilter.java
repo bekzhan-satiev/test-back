@@ -25,6 +25,8 @@ public class LogFilter extends OncePerRequestFilter {
         logger.info("Incoming request: {} {}", request.getMethod(), request.getRequestURI());
 
         Enumeration<String> headerNames = request.getHeaderNames();
+        String remoteAddr = request.getHeader("X-FORWARDED-FOR");
+        logger.warn("XFF: " + remoteAddr);
         if (headerNames != null) {
             while (headerNames.hasMoreElements()) {
                 String headerName = headerNames.nextElement();
